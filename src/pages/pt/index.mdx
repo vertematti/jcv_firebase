@@ -5,7 +5,9 @@ title: "Bem-vindo"
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 <BaseLayout title={frontmatter.title}>
-  # Olá! Esta é a Home
+  <div set:html={frontmatter.body}>
+    # Olá! Esta é a Home
 
-  Bem-vindo ao site em **Português Brasileiro**.
+    Bem-vindo ao site em **Português Brasileiro**.
+  </div>
 </BaseLayout>

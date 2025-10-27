@@ -6,7 +6,9 @@ description: "Meu currículo profissional"
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 <BaseLayout title={frontmatter.title}>
-  # Currículo
+  <div set:html={frontmatter.body}>
+    # Currículo
 
-  Aqui está meu histórico profissional em **português**.
+    Aqui está meu histórico profissional em **português**.
+  </div>
 </BaseLayout>

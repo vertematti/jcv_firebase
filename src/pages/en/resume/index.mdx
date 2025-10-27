@@ -6,8 +6,10 @@ description: "My professional resumes"
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 <BaseLayout title={frontmatter.title}>
-  # Resume
+  <div set:html={frontmatter.body}>
+    # Resume
 
-  Here is my professional background in **English**.
+    Here is my professional background in **English**.
+  </div>
 </BaseLayout>
 

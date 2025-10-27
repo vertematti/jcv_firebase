@@ -6,7 +6,9 @@ description: "Nossos clientes"
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 <BaseLayout title={frontmatter.title}>
-  # Clientes
+  <div set:html={frontmatter.body}>
+    # Clientes
 
-  Lista de empresas que já atendi em **português**.
+    Lista de empresas que já atendi em **português**.
+  </div>
 </BaseLayout>

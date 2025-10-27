@@ -1,0 +1,37 @@
+---
+// src/pages/admin/index.astro
+import TinaAdminWrapper from '../../components/TinaAdminWrapper.jsx';
+---
+
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <title>TinaCMS Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body, html { margin: 0; padding: 0; height: 100%; font-family: system-ui; }
+      #tina-loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.2rem;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="tina-loading">Carregando TinaCMS...</div>
+    <TinaAdminWrapper client:load />
+
+    <script>
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/tinacms@1.6.4/dist/admin/index.js';
+      script.onload = () => {
+        window.tinaReady = true;
+      };
+      document.head.appendChild(script);
+    </script>
+  </body>
+</html>

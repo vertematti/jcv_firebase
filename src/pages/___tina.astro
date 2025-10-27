@@ -1,0 +1,21 @@
+---
+// src/pages/___tina.astro
+import { promises as fs } from 'fs';
+import path from 'path';
+
+const repoRoot = process.cwd();
+
+export const POST = async ({ request }) => {
+  try {
+    const { file, content } = await request.json();
+    const filePath = path.join(repoRoot, file);
+    await fs.mkdir(path.dirname(filePath), { recursive: true });
+    await fs.writeFile(filePath, content, 'utf-8');
+    return new Response(JSON.stringify({ success: true }), { status: 200 });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+  }
+};
+
+export const GET = () => new Response('OK');
+---
