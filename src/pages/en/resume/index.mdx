@@ -1,15 +1,19 @@
 ---
 title: "Resume"
-description: "My professional resumes"
 ---
 
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-<BaseLayout title={frontmatter.title}>
+<!-- tina-body -->
   <div set:html={frontmatter.body}>
     # Resume
 
     Here is my professional background in **English**.
   </div>
+<!-- /tina-body -->
+
+<BaseLayout title={frontmatter.title}>
+  <div set:html={frontmatter.body} />
 </BaseLayout>
+
 

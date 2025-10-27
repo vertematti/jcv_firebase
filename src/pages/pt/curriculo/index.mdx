@@ -4,3 +4,21 @@ title: Currículo
 ---
 
 Teste de Currículo em Português
+
+---
+title: "Currículo"
+---
+
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+<!-- tina-body -->
+  <div set:html={frontmatter.body}>
+    # Currículo
+
+    Aqui disponho meu Curriculo Pessoal em **Português**.
+  </div>
+<!-- /tina-body -->
+
+<BaseLayout title={frontmatter.title}>
+  <div set:html={frontmatter.body} />
+</BaseLayout>

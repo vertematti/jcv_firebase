@@ -4,10 +4,14 @@ title: "Welcome"
 
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-<BaseLayout title={frontmatter.title} lang={frontmatter.lang}>
+<!-- tina-body -->
     <div set:html={frontmatter.body}>
         # Hello! This is the Home
 
         Welcome to the site in **British English**.
     </div>
+<!-- /tina-body -->
+
+<BaseLayout title={frontmatter.title}>
+  <div set:html={frontmatter.body} />
 </BaseLayout>

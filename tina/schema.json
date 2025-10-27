@@ -10,6 +10,10 @@
         "router": {
           "type": "function",
           "body": "return document._sys.relativePath.replace(/^src\\/pages\\//, '').replace(/\\/index\\.mdx$/, '/').replace(/\\.mdx$/, '');"
+        },
+        "allowedActions": {
+          "create": true,
+          "delete": false
         }
       },
       "fields": [
@@ -24,9 +28,20 @@
           "type": "rich-text",
           "name": "body",
           "label": "Conteúdo",
-          "isBody": true
+          "isBody": true,
+          "templates": [
+            {
+              "name": "Layout",
+              "label": "Layout (não editar)",
+              "fields": []
+            }
+          ]
         }
-      ]
+      ],
+      "template": "mdx",
+      "match": {
+        "include": "**/*.mdx"
+      }
     }
   ]
 }

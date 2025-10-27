@@ -1,14 +1,18 @@
 ---
 title: "Clients"
-description: "Our clients"
 ---
 
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-<BaseLayout title={frontmatter.title}>
+<!-- tina-body -->
   <div set:html={frontmatter.body}>
     # Clients
 
     List of companies I've worked with in **English**.
   </div>
+<!-- /tina-body -->
+
+<BaseLayout title={frontmatter.title}>
+  <div set:html={frontmatter.body} />
 </BaseLayout>
+

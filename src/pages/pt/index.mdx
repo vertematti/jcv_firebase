@@ -1,13 +1,17 @@
----
+--- 
 title: "Bem-vindo"
 ---
 
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-<BaseLayout title={frontmatter.title}>
-  <div set:html={frontmatter.body}>
-    # Olá! Esta é a Home
+{/* tina-body */}
+<div>
+  <h1>Bem-vindo ao site!</h1>
+  <p>Edite este conteúdo no TinaCMS.</p>
+</div>
+{/* /tina-body */}
 
-    Bem-vindo ao site em **Português Brasileiro**.
-  </div>
+<BaseLayout title={frontmatter.title}>
+  <div set:html={frontmatter.body} />
 </BaseLayout>
+
