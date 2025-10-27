@@ -1,0 +1,80 @@
+---
+// src/layouts/BaseLayout.astro
+import { ViewTransitions } from 'astro:transitions';
+
+export interface Props {
+  title: string;
+}
+
+// Pega o idioma da URL
+const { pathname } = Astro.url;
+const isPt = pathname.startsWith('/pt/') || pathname === '/pt' || pathname === '/';
+const currentLang = isPt ? 'pt' : 'en';
+
+// Mapeamento de rotas entre idiomas
+const routes = {
+  home: { pt: '/pt/', en: '/en/' },
+  curriculo: { pt: '/pt/curriculo/', en: '/en/resume/' },
+  clientes: { pt: '/pt/clientes/', en: '/en/clients/' },
+};
+
+// Função para obter link no outro idioma
+function getAlternateLink(currentPath: string) {
+  if (currentPath.startsWith('/pt/')) {
+    return currentPath.replace(/^\/pt/, '/en').replace('curriculo', 'resume').replace('clientes', 'clients');
+  } else {
+    return currentPath.replace(/^\/en/, '/pt').replace('resume', 'curriculo').replace('clients', 'clientes');
+  }
+}
+
+const alternateUrl = getAlternateLink(pathname);
+const { title } = Astro.props;
+---
+
+<html lang={currentLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <ViewTransitions />
+    <link rel="icon" href="/favicon.ico" />
+    <!-- Alternativa de idioma para SEO -->
+    <link rel="alternate" hreflang="pt" href={routes.home.pt} />
+    <link rel="alternate" hreflang="en" href={routes.home.en} />
+  </head>
+  <body>
+    <header style="padding: 1rem; background: #1a1a1a; color: white; display: flex; justify-content: space-between; align-items: center; font-family: system-ui;">
+      <a href={routes.home[currentLang]} style="color: white; text-decoration: none; font-weight: bold; font-size: 1.2rem;">
+        MeuSite
+      </a>
+      <nav style="display: flex; gap: 1.5rem;">
+        <a href={routes.home[currentLang]} style="color: white; text-decoration: none;">
+          {currentLang === 'pt' ? 'Home' : 'Home'}
+        </a>
+        <a href={routes.curriculo[currentLang]} style="color: white; text-decoration: none;">
+          {currentLang === 'pt' ? 'Currículo' : 'Resume'}
+        </a>
+        <a href={routes.clientes[currentLang]} style="color: white; text-decoration: none;">
+          {currentLang === 'pt' ? 'Clientes' : 'Clients'}
+        </a>
+      </nav>
+      <div>
+        <a
+          href={alternateUrl}
+          style="color: #00bfff; font-weight: bold; text-decoration: none; font-size: 0.9rem;"
+          aria-label={`Switch to ${currentLang === 'pt' ? 'English' : 'Português'}`}
+        >
+          {currentLang === 'pt' ? 'EN' : 'PT'}
+        </a>
+      </div>
+    </header>
+
+    <main style="max-width: 800px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6;">
+      <slot />
+    </main>
+
+    <footer style="text-align: center; padding: 2rem; background: #f0f0f0; margin-top: 4rem; font-size: 0.9rem; color: #555;">
+      © 2025 MeuSite. {currentLang === 'pt' ? 'Todos os direitos reservados.' : 'All rights reserved.'}
+    </footer>
+  </body>
+</html>
