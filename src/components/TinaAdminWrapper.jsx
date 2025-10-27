@@ -1,6 +1,6 @@
 // src/components/TinaAdminWrapper.jsx
 import { TinaCMS } from 'tinacms';
-import config from '../../tina/config.js';
+import schema from '../../tina/schema.json' with { type: 'json' };
 
 class LocalClient {
   async request(query, { variables } = {}) {
@@ -21,7 +21,7 @@ export default function TinaAdminWrapper() {
   return <div id="tina-root" style={{ height: '100vh' }} />;
 }
 
-// Inicializa fora do React
+// Inicializa no cliente
 if (typeof window !== 'undefined') {
   const initTina = () => {
     if (window.tinaReady && window.TinaAdmin) {
@@ -29,7 +29,7 @@ if (typeof window !== 'undefined') {
       const cms = new TinaCMS({
         enabled: true,
         sidebar: true,
-        schema: config.schema,
+        schema: schema,
         client,
       });
 
@@ -47,7 +47,6 @@ if (typeof window !== 'undefined') {
     }
   };
 
-  // Aguarda o script do CDN
   window.addEventListener('load', () => {
     setTimeout(initTina, 500);
   });
